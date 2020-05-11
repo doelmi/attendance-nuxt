@@ -43,7 +43,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-leaflet', '@nuxtjs/axios'
   ],
+
+  axios: {
+    // proxyHeaders: false
+  },
+
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
