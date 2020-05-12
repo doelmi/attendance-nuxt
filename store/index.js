@@ -19,9 +19,14 @@ const createStore = () => {
       nik: localStorage.getItem('state.nik'),
       name: localStorage.getItem('state.name'),
       email: localStorage.getItem('state.email'),
-      forca_devicemodel: localStorage.getItem('state.forca_devicemodel')
+      forca_devicemodel: localStorage.getItem('state.forca_devicemodel'),
+      appTitle: localStorage.getItem('state.appTitle') || 'Welcome'
     },
     mutations: {
+      setTitle (state, title) {
+        state.appTitle = title
+        localStorage.setItem('state.appTitle', state.appTitle)
+      },
       increment (state) {
         state.counter++
         localStorage.setItem('state.counter', state.counter)
@@ -59,14 +64,16 @@ const createStore = () => {
         localStorage.setItem('state.email', state.email)
       },
       setModelDevice (state, historyData) {
-        console.log(historyData)
         state.forca_devicemodel = historyData ? historyData.forca_devicemodel : ''
         localStorage.setItem('state.forca_devicemodel', state.forca_devicemodel)
       },
       deleteStateValue (state) {
+        const except = ['appTitle']
         for (const s in state) {
-          state[s] = null
-          localStorage.removeItem(`state.${s}`)
+          if (!except.includes(s)) {
+            state[s] = null
+            localStorage.removeItem(`state.${s}`)
+          }
         }
       }
     },

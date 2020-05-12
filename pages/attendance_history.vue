@@ -1,169 +1,161 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
+  <v-container fluid>
+    <v-row
+      align="center"
+      justify="center"
     >
-      <v-alert
-        v-if="errorMessage"
-        dense
-        outlined
-        type="error"
-        max-width="400"
-        width="400"
-      >
-        {{ errorMessage }}
-      </v-alert>
-      <v-alert
-        v-if="!login"
-        dense
-        outlined
-        type="error"
-        max-width="400"
-        width="400"
-      >
-        You should login first!
-      </v-alert>
-      <v-card
-        v-else
-        max-width="500"
-        width="500"
-        class="mx-auto"
-      >
-        <v-card-title class="headline">
-          {{ title }}
-        </v-card-title>
-        <v-list two-line>
-          <template v-for="(item, index) in items">
-            <v-list-item :key="item.id" @click.stop="openDetailAH(index)">
-              <template>
-                <v-list-item-avatar>
-                  <v-icon v-text="item.icon" />
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.title" />
-                  <v-list-item-subtitle v-text="item.headline" />
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-list-item-action-text v-text="item.action" />
-                </v-list-item-action>
-              </template>
-            </v-list-item>
-
-            <v-divider
-              v-if="index + 1 < items.length"
-              :key="index"
-            />
-          </template>
-        </v-list>
-      </v-card>
-      <v-dialog
-        v-model="modalAH"
-        max-width="350"
-        scrollable
-      >
-        <v-card>
+      <v-col class="col-xs-12 col-sm-8 col-md-6">
+        <v-alert
+          v-if="errorMessage"
+          dense
+          outlined
+          type="error"
+        >
+          {{ errorMessage }}
+        </v-alert>
+        <v-alert
+          v-if="!login"
+          dense
+          outlined
+          type="error"
+        >
+          You should login first!
+        </v-alert>
+        <v-card
+          v-else
+          class="mx-auto"
+        >
           <v-card-title class="headline">
-            {{ title }} Detail
+            {{ title }}
           </v-card-title>
+          <v-list two-line>
+            <template v-for="(item, index) in items">
+              <v-list-item :key="item.id" @click.stop="openDetailAH(index)">
+                <template>
+                  <v-list-item-avatar>
+                    <v-icon v-text="item.icon" />
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="item.title" />
+                    <v-list-item-subtitle v-text="item.headline" />
+                  </v-list-item-content>
 
-          <v-card-text class="pt-5" style="height: 400px;">
-            <v-text-field
-              v-model="nik"
-              label="NIK"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="name"
-              label="Name"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="date"
-              label="Date"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="type"
-              label="Type"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="imageUrl"
-              label="Image URL"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="description"
-              label="Description"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="location"
-              label="Location"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="latLng"
-              label="Lat Lng"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="branch"
-              label="Branch"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="distance"
-              label="Distance"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="deviceId"
-              label="Device ID"
-              outlined
-              readonly
-            />
-            <v-text-field
-              v-model="deviceModel"
-              label="Device Model"
-              outlined
-              readonly
-            />
-          </v-card-text>
+                  <v-list-item-action>
+                    <v-list-item-action-text v-text="item.action" />
+                  </v-list-item-action>
+                </template>
+              </v-list-item>
 
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              text
-              @click="modalAH = false"
-            >
-              Close
-            </v-btn>
-          </v-card-actions>
+              <v-divider
+                v-if="index + 1 < items.length"
+                :key="index"
+              />
+            </template>
+          </v-list>
         </v-card>
-      </v-dialog>
-      <v-overlay :value="loading">
-        <v-progress-circular indeterminate />
-      </v-overlay>
-    </v-flex>
-  </v-layout>
+        <v-dialog
+          v-model="modalAH"
+          width="350"
+          max-width="100%"
+          scrollable
+        >
+          <v-card>
+            <v-card-title class="headline">
+              {{ title }} Detail
+            </v-card-title>
+
+            <v-card-text class="pt-5" style="height: 400px;">
+              <v-text-field
+                v-model="nik"
+                label="NIK"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="name"
+                label="Name"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="date"
+                label="Date"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="type"
+                label="Type"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="imageUrl"
+                label="Image URL"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="description"
+                label="Description"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="location"
+                label="Location"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="latLng"
+                label="Lat Lng"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="branch"
+                label="Branch"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="distance"
+                label="Distance"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="deviceId"
+                label="Device ID"
+                outlined
+                readonly
+              />
+              <v-text-field
+                v-model="deviceModel"
+                label="Device Model"
+                outlined
+                readonly
+              />
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                text
+                @click="modalAH = false"
+              >
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-overlay :value="loading">
+          <v-progress-circular indeterminate />
+        </v-overlay>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -191,6 +183,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.commit('setTitle', this.title)
     if (this.login) {
 
     }

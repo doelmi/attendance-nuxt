@@ -41,6 +41,14 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data () {
+    return {
+      title: 'Welcome'
+    }
+  },
+  mounted () {
+    this.$store.commit('setTitle', this.title)
   }
 }
 </script>
