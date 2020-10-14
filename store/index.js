@@ -20,7 +20,8 @@ const createStore = () => {
       name: localStorage.getItem('state.name'),
       email: localStorage.getItem('state.email'),
       forca_devicemodel: localStorage.getItem('state.forca_devicemodel'),
-      appTitle: localStorage.getItem('state.appTitle') || 'Welcome'
+      appTitle: localStorage.getItem('state.appTitle') || 'Welcome',
+      erpUrl: 'https://forcaerp.sisi.id'
     },
     mutations: {
       setTitle (state, title) {
@@ -84,7 +85,7 @@ const createStore = () => {
           password: auth.password
         }
         const request = {
-          url: 'https://erp.sisi.id/api/ws/authentication/v1/login',
+          url: state.erpUrl + '/api/ws/authentication/v1/login',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded'],
           method: 'POST',
@@ -104,7 +105,7 @@ const createStore = () => {
       doLogout ({ commit, state }) {
         const body = {}
         const request = {
-          url: 'https://erp.sisi.id/api/ws/authentication/v1/logout',
+          url: state.erpUrl + '/api/ws/authentication/v1/logout',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded', `Forca-Token: ${state.token}`],
           method: 'POST',
@@ -125,7 +126,7 @@ const createStore = () => {
           ad_user_id: state.ad_user_id
         }
         const request = {
-          url: 'https://erp.sisi.id/api/ws/transaction/v1/getUserInfo',
+          url: state.erpUrl + '/api/ws/transaction/v1/getUserInfo',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded', `Forca-Token: ${state.token}`],
           method: 'POST',
@@ -144,7 +145,7 @@ const createStore = () => {
           ad_user_id: state.ad_user_id
         }
         const request = {
-          url: 'https://erp.sisi.id/api/ws/transaction/v1/getLocation',
+          url: state.erpUrl + '/api/ws/transaction/v1/getLocation',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded', `Forca-Token: ${state.token}`],
           method: 'POST',
@@ -169,7 +170,7 @@ const createStore = () => {
           }
         }
         const request = {
-          url: 'https://erp.sisi.id/api/ws/transaction/v1/getAttendanceHistory',
+          url: state.erpUrl + '/api/ws/transaction/v1/getAttendanceHistory',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded', `Forca-Token: ${state.token}`],
           method: 'POST',
@@ -184,7 +185,7 @@ const createStore = () => {
       insertAttendance ({ commit, state }, attendanceData) {
         const body = attendanceData
         const request = {
-          url: 'https://erp.sisi.id/api/ws/transaction/v1/insertAttendance',
+          url: state.erpUrl + '/api/ws/transaction/v1/insertAttendance',
           body,
           headers: ['Accept: application/json', 'Content-Type: application/x-www-form-urlencoded', `Forca-Token: ${state.token}`],
           method: 'POST',
