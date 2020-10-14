@@ -232,7 +232,7 @@ export default {
       this.nik = detail.nik
       this.name = detail.name
       this.date = detail.action
-      this.type = detail.status === 'in' ? 'Clock In' : 'Clock Out'
+      this.type = detail.title
       this.imageUrl = detail.imageUrl
       this.description = detail.description
       this.location = detail.location
